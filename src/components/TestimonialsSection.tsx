@@ -10,7 +10,7 @@ const TestimonialsSection = () => {
       company: "Graduated from AWB Teachers",
       content: "AWB Academy completely transformed my career. The website building course was comprehensive and practical. Now I'm working as a certified web developer for one of their partner companies!",
       rating: 5,
-      image: "https://images.unsplash.com/photo-1494790108755-2616b612b977?w=100&h=100&fit=crop&crop=face"
+      image: "https://africanwebsitebuilders.com/elements/images/uploads/9/6757022a7146d_A-Biz2-h.png"
     },
     {
       name: "Michael Kwame",
