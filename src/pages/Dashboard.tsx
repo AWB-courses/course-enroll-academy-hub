@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -27,96 +26,124 @@ const Dashboard = () => {
     const userData = JSON.parse(currentUser);
     setUser(userData);
 
-    // Initialize sample courses if not exists
+    // Initialize AWB Academy courses if not exists
     const existingCourses = localStorage.getItem('courses');
     if (!existingCourses) {
-      const sampleCourses = [
+      const awbCourses = [
         {
           id: '1',
-          title: 'React Fundamentals',
-          instructor: 'Sarah Johnson',
-          category: 'Frontend',
-          duration: '8 hours',
+          title: 'AWB Teachers - Website Building',
+          instructor: 'Mr. Zion',
+          category: 'Technology',
+          duration: '12 weeks',
           level: 'Beginner',
-          rating: 4.8,
-          enrolled: 1234,
-          description: 'Learn the fundamentals of React including components, state, and props.',
-          image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=400&h=250&fit=crop',
-          lessons: 32,
-          price: 49.99
+          rating: 4.9,
+          enrolled: 1200,
+          description: 'Learn professional website building skills and join our certified team of website builders across Africa.',
+          image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop',
+          lessons: 48,
+          price: 99.99
         },
         {
           id: '2',
-          title: 'Advanced JavaScript',
-          instructor: 'Mike Chen',
-          category: 'Programming',
-          duration: '12 hours',
-          level: 'Advanced',
-          rating: 4.9,
-          enrolled: 856,
-          description: 'Master advanced JavaScript concepts including closures, promises, and async/await.',
-          image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&h=250&fit=crop',
-          lessons: 45,
+          title: 'African JahVa Radio',
+          instructor: 'Radio Team',
+          category: 'Media',
+          duration: '8 weeks',
+          level: 'Intermediate',
+          rating: 4.8,
+          enrolled: 500,
+          description: 'Master radio broadcasting, audio production, and DJ skills for African JahVa electronic dance music.',
+          image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=250&fit=crop',
+          lessons: 32,
           price: 79.99
         },
         {
           id: '3',
-          title: 'UI/UX Design Principles',
-          instructor: 'Emma Davis',
-          category: 'Design',
-          duration: '6 hours',
-          level: 'Intermediate',
-          rating: 4.7,
-          enrolled: 2341,
-          description: 'Learn essential UI/UX design principles and create beautiful user interfaces.',
-          image: 'https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=250&fit=crop',
-          lessons: 28,
-          price: 39.99
-        },
-        {
-          id: '4',
-          title: 'Node.js Backend Development',
-          instructor: 'James Wilson',
-          category: 'Backend',
-          duration: '15 hours',
-          level: 'Intermediate',
-          rating: 4.8,
-          enrolled: 967,
-          description: 'Build robust backend applications with Node.js, Express, and MongoDB.',
-          image: 'https://images.unsplash.com/photo-1627398242454-45a1465c2479?w=400&h=250&fit=crop',
-          lessons: 52,
+          title: 'Learn Finance',
+          instructor: 'Financial Experts',
+          category: 'Finance',
+          duration: '10 weeks',
+          level: 'Beginner',
+          rating: 4.9,
+          enrolled: 1000,
+          description: 'Master money management, accounting, budgeting, and financial literacy for personal and business success.',
+          image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=250&fit=crop',
+          lessons: 40,
           price: 89.99
         },
         {
+          id: '4',
+          title: 'Management Course',
+          instructor: 'Business Leaders',
+          category: 'Business',
+          duration: '6 weeks',
+          level: 'Intermediate',
+          rating: 4.7,
+          enrolled: 800,
+          description: 'Develop time management, leadership, and business strategy skills for personal and professional growth.',
+          image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop',
+          lessons: 24,
+          price: 69.99
+        },
+        {
           id: '5',
-          title: 'Python for Data Science',
-          instructor: 'Dr. Lisa Anderson',
-          category: 'Data Science',
-          duration: '20 hours',
+          title: 'Cool Viral Moves',
+          instructor: 'Dance Instructors',
+          category: 'Entertainment',
+          duration: '4 weeks',
           level: 'Beginner',
-          rating: 4.9,
-          enrolled: 3456,
-          description: 'Learn Python programming for data analysis, visualization, and machine learning.',
-          image: 'https://images.unsplash.com/photo-1526379095098-d400fd0bf935?w=400&h=250&fit=crop',
-          lessons: 68,
-          price: 99.99
+          rating: 4.6,
+          enrolled: 300,
+          description: 'Learn viral dance moves and social media content creation for African JahVa music promotion.',
+          image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop',
+          lessons: 16,
+          price: 49.99
         },
         {
           id: '6',
-          title: 'DevOps Fundamentals',
-          instructor: 'Alex Rodriguez',
-          category: 'DevOps',
-          duration: '10 hours',
+          title: 'GBE Partnerships',
+          instructor: 'Mr. Brown',
+          category: 'Business',
+          duration: '8 weeks',
+          level: 'Advanced',
+          rating: 4.8,
+          enrolled: 200,
+          description: 'Entrepreneur networking, business incubation, and partnership development for startups.',
+          image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=400&h=250&fit=crop',
+          lessons: 32,
+          price: 149.99
+        },
+        {
+          id: '7',
+          title: 'Angel Travel',
+          instructor: 'Travel Experts',
+          category: 'Hospitality',
+          duration: '6 weeks',
           level: 'Intermediate',
-          rating: 4.6,
-          enrolled: 543,
-          description: 'Master DevOps practices including CI/CD, Docker, and Kubernetes.',
-          image: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=400&h=250&fit=crop',
-          lessons: 38,
-          price: 69.99
+          rating: 4.7,
+          enrolled: 400,
+          description: 'Hotel management, travel planning, and hospitality services for the tourism industry.',
+          image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=250&fit=crop',
+          lessons: 24,
+          price: 79.99
+        },
+        {
+          id: '8',
+          title: 'Fitness Instructor Certification',
+          instructor: 'Fitness Team',
+          category: 'Health',
+          duration: '8 weeks',
+          level: 'Intermediate',
+          rating: 4.8,
+          enrolled: 600,
+          description: 'Become a certified fitness instructor with comprehensive training in exercise science and wellness.',
+          image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop',
+          lessons: 32,
+          price: 99.99
         }
       ];
-      localStorage.setItem('courses', JSON.stringify(sampleCourses));
+      localStorage.setItem('courses', JSON.stringify(awbCourses));
     }
     
     setCourses(JSON.parse(localStorage.getItem('courses') || '[]'));
@@ -174,7 +201,7 @@ const Dashboard = () => {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <BookOpen className="h-8 w-8 text-indigo-600" />
-              <h1 className="text-2xl font-bold text-gray-900">AcademyHub</h1>
+              <h1 className="text-2xl font-bold text-gray-900">AWB Academy</h1>
             </div>
             <div className="flex items-center space-x-4">
               <div className="flex items-center space-x-2 text-sm text-gray-600">
@@ -196,7 +223,7 @@ const Dashboard = () => {
           <h2 className="text-3xl font-bold text-gray-900 mb-2">
             Welcome back, {user.firstName}! 👋
           </h2>
-          <p className="text-gray-600">Continue your learning journey and explore new courses.</p>
+          <p className="text-gray-600">Continue your AWB Academy journey and explore our company training programs.</p>
         </div>
 
         {/* Stats Cards */}
@@ -241,7 +268,7 @@ const Dashboard = () => {
         {/* My Courses Section */}
         {enrolledCourses.length > 0 && (
           <div className="mb-12">
-            <h3 className="text-2xl font-bold text-gray-900 mb-6">My Courses</h3>
+            <h3 className="text-2xl font-bold text-gray-900 mb-6">My AWB Courses</h3>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {enrolledCourses.map((course) => (
                 <Card key={course.id} className="bg-white border-gray-200 hover:shadow-lg transition-all duration-300">
@@ -278,7 +305,7 @@ const Dashboard = () => {
 
         {/* Course Catalog */}
         <div>
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">Explore Courses</h3>
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">Explore AWB Academy Courses</h3>
           
           {/* Search and Filter */}
           <div className="flex flex-col md:flex-row gap-4 mb-6">
@@ -320,7 +347,7 @@ const Dashboard = () => {
                     <Badge variant="secondary">{course.level}</Badge>
                   </div>
                   <div className="absolute top-2 right-2">
-                    <Badge className="bg-white text-gray-900">${course.price}</Badge>
+                    <Badge className="bg-white text-gray-900">£{course.price}</Badge>
                   </div>
                 </div>
                 <CardContent className="p-6">
