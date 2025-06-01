@@ -7,19 +7,19 @@ const TeamSection = () => {
       name: "Mr Angel",
       role: "FOUNDER",
       description: "Tech entrepreneur, business owner, and record producer based in the UK, Mr. Angel founded the AWB Course to empower motivated African and Caribbean students with the modern skills needed to secure jobs and enhance their income.",
-      image: "/placeholder.svg"
+      image: "https://africanwebsitebuilders.com/elements/images/uploads/9/6756fe630aee4_796559053204674862-copy.png"
     },
     {
       name: "Mr Zion",
       role: "C.E.O",
       description: "Entrepreneur, digital nomad & professional street skater, instructor, and based in the UK, Mr. Zion takes the lead of AWB by training teachers & managing staff within the program, developing tutorials & driving AWB expansion.",
-      image: "/placeholder.svg"
+      image: "https://africanwebsitebuilders.com/elements/images/uploads/9/66f9ec46e4e7d_03c85133a448489db2a2f9a856f24623.jpg"
     },
     {
       name: "Mr Brown",
       role: "SALES MENTOR",
       description: "Professional sales coach Mr. Brown, boasts 15 years of extensive experience in sales. Throughout his career, he has successfully generated millions of dollars in revenue for a variety of well-known companies across the U.S.",
-      image: "/placeholder.svg"
+      image: "https://africanwebsitebuilders.com/elements/images/uploads/2/66fbfc59e57d9_redzen_s_cinematic_realistic_photo_Canon_shot_of_a_Caribbean__e2716a77-c92b-421c-bf2b-13ca9801759a_2-(3).jpg?0.3047133218949525"
     }
   ];
 
