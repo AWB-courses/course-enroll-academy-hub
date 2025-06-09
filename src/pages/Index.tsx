@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -130,14 +129,14 @@ const Index = () => {
             Join our comprehensive training programmes designed to equip you with modern skills and direct pathways to employment in our network of 20+ companies.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700">
-              <BookOpen className="mr-2 h-5 w-5" />
+            <Link to="/courses" className="inline-flex items-center justify-center gap-2 h-11 rounded-md px-8 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium transition-all duration-200">
+              <BookOpen className="h-5 w-5" />
               Browse Courses
-            </Button>
-            <Button size="lg" variant="outline">
-              <Users className="mr-2 h-5 w-5" />
+            </Link>
+            <Link to="/contact" className="inline-flex items-center justify-center gap-2 h-11 rounded-md px-8 border border-input bg-background hover:bg-accent hover:text-accent-foreground font-medium transition-colors">
+              <Users className="h-5 w-5" />
               Join Community
-            </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -270,10 +269,10 @@ const Index = () => {
           <p className="text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
             Join thousands of students who have transformed their careers with Zylo Academy. Your future starts today.
           </p>
-          <Button size="lg" className="bg-white text-indigo-600 hover:bg-gray-100">
-            <Award className="mr-2 h-5 w-5" />
+          <Link to="/courses" className="inline-flex items-center justify-center gap-2 h-11 rounded-md px-8 bg-white text-indigo-600 hover:bg-gray-100 font-medium transition-colors">
+            <Award className="h-5 w-5" />
             Get Started Today
-          </Button>
+          </Link>
         </div>
       </section>
 

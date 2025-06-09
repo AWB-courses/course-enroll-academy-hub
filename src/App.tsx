@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -21,6 +20,14 @@ import Disclaimer from "./pages/Disclaimer";
 import Legal from "./pages/Legal";
 import NotFound from "./pages/NotFound";
 import CourseLoginPage from "./components/CourseLoginPage";
+import AWBTeachers from "./pages/companies/AWBTeachers";
+import AfricanJahVaRadio from "./pages/companies/AfricanJahVaRadio";
+import CoolViralMoves from "./pages/companies/CoolViralMoves";
+import LearnFinance from "./pages/companies/LearnFinance";
+import ManagementCourse from "./pages/companies/ManagementCourse";
+import GBEPartnerships from "./pages/companies/GBEPartnerships";
+import AngelTravel from "./pages/companies/AngelTravel";
+import GiveToGetFoundation from "./pages/companies/GiveToGetFoundation";
 
 const queryClient = new QueryClient();
 
@@ -42,6 +49,16 @@ const AppContent = () => {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="/legal" element={<Legal />} />
+        
+        {/* Company pages */}
+        <Route path="/companies/awb-teachers" element={<AWBTeachers />} />
+        <Route path="/companies/african-jahva-radio" element={<AfricanJahVaRadio />} />
+        <Route path="/companies/cool-viral-moves" element={<CoolViralMoves />} />
+        <Route path="/companies/learn-finance" element={<LearnFinance />} />
+        <Route path="/companies/management-course" element={<ManagementCourse />} />
+        <Route path="/companies/gbe-partnerships" element={<GBEPartnerships />} />
+        <Route path="/companies/angel-travel" element={<AngelTravel />} />
+        <Route path="/companies/give-to-get-foundation" element={<GiveToGetFoundation />} />
         
         {/* Course-specific login pages */}
         <Route path="/awb" element={<CourseLoginPage />} />

@@ -20,9 +20,14 @@ const Footer = () => {
   ];
 
   const companies = [
-    'AWB Teachers', 'African JahVa Radio', 'Cool Viral Moves',
-    'Learn Finance', 'Management Course', 'GBE Partnerships',
-    'Angel Travel', 'Give to Get Foundation'
+    { name: 'AWB Teachers', href: '/companies/awb-teachers' },
+    { name: 'African JahVa Radio', href: '/companies/african-jahva-radio' },
+    { name: 'Cool Viral Moves', href: '/companies/cool-viral-moves' },
+    { name: 'Learn Finance', href: '/companies/learn-finance' },
+    { name: 'Management Course', href: '/companies/management-course' },
+    { name: 'GBE Partnerships', href: '/companies/gbe-partnerships' },
+    { name: 'Angel Travel', href: '/companies/angel-travel' },
+    { name: 'Give to Get Foundation', href: '/companies/give-to-get-foundation' }
   ];
 
   return (
@@ -33,7 +38,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <BookOpen className="h-8 w-8 text-indigo-400" />
-              <h3 className="text-2xl font-bold">AWB Academy</h3>
+              <h3 className="text-2xl font-bold">Zylo Academy</h3>
             </div>
             <p className="text-gray-300 leading-relaxed">
               Empowering African and Caribbean students with modern skills for career success and financial growth.
@@ -87,8 +92,10 @@ const Footer = () => {
             <h4 className="text-lg font-semibold mb-4">Our Companies</h4>
             <ul className="space-y-1 text-sm">
               {companies.map((company, index) => (
-                <li key={index} className="text-gray-300">
-                  {company}
+                <li key={index}>
+                  <Link to={company.href} className="text-gray-300 hover:text-indigo-400 transition-colors">
+                    {company.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -98,7 +105,7 @@ const Footer = () => {
         <div className="border-t border-gray-700 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-300 text-sm">
-              © {currentYear} AWB Academy. All rights reserved.
+              © {currentYear} Zylo Academy. All rights reserved.
             </p>
             <p className="text-gray-300 text-sm mt-2 md:mt-0">
               Building the future of African and Caribbean talent.
