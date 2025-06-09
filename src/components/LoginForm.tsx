@@ -7,7 +7,11 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { LogIn, Eye, EyeOff } from 'lucide-react';
 
-const LoginForm = () => {
+interface LoginFormProps {
+  courseId?: string;
+}
+
+const LoginForm = ({ courseId = 'general' }: LoginFormProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -22,24 +26,24 @@ const LoginForm = () => {
     // Simulate API call
     setTimeout(() => {
       const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user = users.find((u: any) => u.email === email && u.password === password);
+      const user = users.find((u: any) => u.email === email && u.password === password && u.courseId === courseId);
 
       if (user) {
         localStorage.setItem('currentUser', JSON.stringify(user));
         toast({
-          title: "Welcome to AWB Academy!",
+          title: "Welcome to Zylo Academy!",
           description: `Successfully logged in as ${user.firstName} ${user.lastName}`,
         });
         
         if (user.role === 'admin') {
           navigate('/admin-dashboard');
         } else {
-          navigate('/dashboard');
+          navigate(`/dashboard/${courseId}`);
         }
       } else {
         toast({
           title: "Login failed",
-          description: "Invalid email or password. Please try again.",
+          description: "Invalid email or password for this course. Please try again.",
           variant: "destructive",
         });
       }
@@ -47,14 +51,46 @@ const LoginForm = () => {
     }, 1000);
   };
 
-  // Demo credentials helper
+  // Course-specific demo credentials
+  const getDemoCredentials = () => {
+    const courseCredentials: { [key: string]: { student: { email: string; password: string }, admin: { email: string; password: string } } } = {
+      awb: {
+        student: { email: 'janedoe@awb.com', password: 'student123' },
+        admin: { email: 'admin@awb.com', password: 'admin123' }
+      },
+      radio: {
+        student: { email: 'mikejohnson@radio.com', password: 'student123' },
+        admin: { email: 'admin@radio.com', password: 'admin123' }
+      },
+      finance: {
+        student: { email: 'sarahsmith@finance.com', password: 'student123' },
+        admin: { email: 'admin@finance.com', password: 'admin123' }
+      },
+      management: {
+        student: { email: 'davidbrown@management.com', password: 'student123' },
+        admin: { email: 'admin@management.com', password: 'admin123' }
+      },
+      fitness: {
+        student: { email: 'emilydavis@fitness.com', password: 'student123' },
+        admin: { email: 'admin@fitness.com', password: 'admin123' }
+      },
+      travel: {
+        student: { email: 'johndoe@travel.com', password: 'student123' },
+        admin: { email: 'admin@travel.com', password: 'admin123' }
+      }
+    };
+
+    return courseCredentials[courseId] || courseCredentials.awb;
+  };
+
   const fillDemoCredentials = (role: 'student' | 'admin') => {
+    const credentials = getDemoCredentials();
     if (role === 'admin') {
-      setEmail('admin@awbacademy.com');
-      setPassword('admin123');
+      setEmail(credentials.admin.email);
+      setPassword(credentials.admin.password);
     } else {
-      setEmail('student@awbacademy.com');
-      setPassword('student123');
+      setEmail(credentials.student.email);
+      setPassword(credentials.student.password);
     }
   };
 
@@ -62,7 +98,7 @@ const LoginForm = () => {
     <div className="space-y-6">
       <div className="text-center space-y-2">
         <h3 className="text-2xl font-bold text-gray-900">Welcome Back</h3>
-        <p className="text-gray-600">Sign in to continue your AWB Academy journey</p>
+        <p className="text-gray-600">Sign in to continue your Zylo Academy journey</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -122,7 +158,7 @@ const LoginForm = () => {
 
       {/* Demo Credentials */}
       <div className="border-t pt-4 space-y-2">
-        <p className="text-sm text-gray-600 text-center">Try demo accounts:</p>
+        <p className="text-sm text-gray-600 text-center">Try demo accounts for {courseId.toUpperCase()}:</p>
         <div className="flex space-x-2">
           <Button
             type="button"

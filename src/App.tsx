@@ -9,6 +9,7 @@ import { useScrollToTop } from "@/hooks/useScrollToTop";
 import AIAgent from "@/components/AIAgent";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
+import CourseDashboard from "./components/CourseDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
 import About from "./pages/About";
 import Courses from "./pages/Courses";
@@ -31,6 +32,7 @@ const AppContent = () => {
       <Routes>
         <Route path="/" element={<Index />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard/:courseId" element={<CourseDashboard />} />
         <Route path="/admin-dashboard" element={<AdminDashboard />} />
         <Route path="/about" element={<About />} />
         <Route path="/courses" element={<Courses />} />
@@ -59,18 +61,20 @@ const AppContent = () => {
 
 const App = () => {
   useEffect(() => {
-    // Initialize demo users if not exists
+    // Initialize demo users for each course
     const existingUsers = localStorage.getItem('users');
     if (!existingUsers) {
       const demoUsers = [
+        // AWB Course Users
         {
           id: '1',
-          firstName: 'John',
-          lastName: 'Student',
-          email: 'student@awbacademy.com',
+          firstName: 'Jane',
+          lastName: 'Doe',
+          email: 'janedoe@awb.com',
           password: 'student123',
           role: 'student',
-          enrolledCourses: ['1', '3'],
+          courseId: 'awb',
+          enrolledCourses: ['awb'],
           completedCourses: [],
           joinedDate: new Date().toISOString(),
           progress: {}
@@ -78,10 +82,146 @@ const App = () => {
         {
           id: '2',
           firstName: 'Admin',
-          lastName: 'User',
-          email: 'admin@awbacademy.com',
+          lastName: 'AWB',
+          email: 'admin@awb.com',
           password: 'admin123',
           role: 'admin',
+          courseId: 'awb',
+          enrolledCourses: [],
+          completedCourses: [],
+          joinedDate: new Date().toISOString(),
+          progress: {}
+        },
+        // Radio Course Users
+        {
+          id: '3',
+          firstName: 'Mike',
+          lastName: 'Johnson',
+          email: 'mikejohnson@radio.com',
+          password: 'student123',
+          role: 'student',
+          courseId: 'radio',
+          enrolledCourses: ['radio'],
+          completedCourses: [],
+          joinedDate: new Date().toISOString(),
+          progress: {}
+        },
+        {
+          id: '4',
+          firstName: 'Admin',
+          lastName: 'Radio',
+          email: 'admin@radio.com',
+          password: 'admin123',
+          role: 'admin',
+          courseId: 'radio',
+          enrolledCourses: [],
+          completedCourses: [],
+          joinedDate: new Date().toISOString(),
+          progress: {}
+        },
+        // Finance Course Users
+        {
+          id: '5',
+          firstName: 'Sarah',
+          lastName: 'Smith',
+          email: 'sarahsmith@finance.com',
+          password: 'student123',
+          role: 'student',
+          courseId: 'finance',
+          enrolledCourses: ['finance'],
+          completedCourses: [],
+          joinedDate: new Date().toISOString(),
+          progress: {}
+        },
+        {
+          id: '6',
+          firstName: 'Admin',
+          lastName: 'Finance',
+          email: 'admin@finance.com',
+          password: 'admin123',
+          role: 'admin',
+          courseId: 'finance',
+          enrolledCourses: [],
+          completedCourses: [],
+          joinedDate: new Date().toISOString(),
+          progress: {}
+        },
+        // Management Course Users
+        {
+          id: '7',
+          firstName: 'David',
+          lastName: 'Brown',
+          email: 'davidbrown@management.com',
+          password: 'student123',
+          role: 'student',
+          courseId: 'management',
+          enrolledCourses: ['management'],
+          completedCourses: [],
+          joinedDate: new Date().toISOString(),
+          progress: {}
+        },
+        {
+          id: '8',
+          firstName: 'Admin',
+          lastName: 'Management',
+          email: 'admin@management.com',
+          password: 'admin123',
+          role: 'admin',
+          courseId: 'management',
+          enrolledCourses: [],
+          completedCourses: [],
+          joinedDate: new Date().toISOString(),
+          progress: {}
+        },
+        // Fitness Course Users
+        {
+          id: '9',
+          firstName: 'Emily',
+          lastName: 'Davis',
+          email: 'emilydavis@fitness.com',
+          password: 'student123',
+          role: 'student',
+          courseId: 'fitness',
+          enrolledCourses: ['fitness'],
+          completedCourses: [],
+          joinedDate: new Date().toISOString(),
+          progress: {}
+        },
+        {
+          id: '10',
+          firstName: 'Admin',
+          lastName: 'Fitness',
+          email: 'admin@fitness.com',
+          password: 'admin123',
+          role: 'admin',
+          courseId: 'fitness',
+          enrolledCourses: [],
+          completedCourses: [],
+          joinedDate: new Date().toISOString(),
+          progress: {}
+        },
+        // Travel Course Users
+        {
+          id: '11',
+          firstName: 'John',
+          lastName: 'Doe',
+          email: 'johndoe@travel.com',
+          password: 'student123',
+          role: 'student',
+          courseId: 'travel',
+          enrolledCourses: ['travel'],
+          completedCourses: [],
+          joinedDate: new Date().toISOString(),
+          progress: {}
+        },
+        {
+          id: '12',
+          firstName: 'Admin',
+          lastName: 'Travel',
+          email: 'admin@travel.com',
+          password: 'admin123',
+          role: 'admin',
+          courseId: 'travel',
           enrolledCourses: [],
           completedCourses: [],
           joinedDate: new Date().toISOString(),

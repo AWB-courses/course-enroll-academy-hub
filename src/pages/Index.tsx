@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import TeamSection from '@/components/TeamSection';
@@ -118,7 +117,7 @@ const Index = () => {
           <div className="flex items-center justify-center">
             <div className="flex items-center space-x-2">
               <BookOpen className="h-8 w-8 text-indigo-600" />
-              <h1 className="text-2xl font-bold text-gray-900">AWB Academy</h1>
+              <h1 className="text-2xl font-bold text-gray-900">Zylo Academy</h1>
             </div>
           </div>
         </div>
@@ -129,7 +128,7 @@ const Index = () => {
         <div className="text-center mb-12 sm:mb-20 scroll-animate">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
             Master New Skills with
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600"> AWB Academy</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600"> Zylo Academy</span>
           </h2>
           <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-4xl mx-auto mb-8">
             Empowering motivated African and Caribbean students with modern skills needed to secure jobs and enhance their income through our comprehensive training programs.

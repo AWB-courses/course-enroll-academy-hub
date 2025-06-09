@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import LoginForm from '@/components/LoginForm';
 import TeamSection from '@/components/TeamSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
@@ -17,8 +17,9 @@ interface CourseInfo {
 }
 
 const CourseLoginPage = () => {
-  const { courseId } = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
+  const courseId = location.pathname.substring(1); // Remove leading slash
 
   useEffect(() => {
     const currentUser = localStorage.getItem('currentUser');
@@ -27,10 +28,10 @@ const CourseLoginPage = () => {
       if (user.role === 'admin') {
         navigate('/admin-dashboard');
       } else {
-        navigate('/dashboard');
+        navigate(`/dashboard/${courseId}`);
       }
     }
-  }, [navigate]);
+  }, [navigate, courseId]);
 
   const courseData: { [key: string]: CourseInfo } = {
     awb: {
@@ -113,7 +114,7 @@ const CourseLoginPage = () => {
     }
   };
 
-  const course = courseData[courseId || ''] || courseData.awb;
+  const course = courseData[courseId] || courseData.awb;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
@@ -123,7 +124,7 @@ const CourseLoginPage = () => {
           <div className="flex items-center justify-center">
             <div className="flex items-center space-x-2">
               <BookOpen className="h-8 w-8 text-indigo-600" />
-              <h1 className="text-2xl font-bold text-gray-900">AWB Academy</h1>
+              <h1 className="text-2xl font-bold text-gray-900">Zylo Academy</h1>
             </div>
           </div>
         </div>
@@ -140,7 +141,7 @@ const CourseLoginPage = () => {
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">Enroll in {course.title}</h3>
                   <p className="text-gray-600">Sign in to start your learning journey</p>
                 </div>
-                <LoginForm />
+                <LoginForm courseId={courseId} />
               </CardContent>
             </Card>
           </div>
