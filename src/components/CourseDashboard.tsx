@@ -5,16 +5,18 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import CourseContent from '@/components/CourseContent';
 import { 
   BookOpen, 
   Award, 
   Clock, 
   Users, 
   LogOut, 
-  Play,
-  CheckCircle,
   Star,
-  TrendingUp
+  TrendingUp,
+  Calendar,
+  MessageCircle
 } from 'lucide-react';
 
 const CourseDashboard = () => {
@@ -40,86 +42,60 @@ const CourseDashboard = () => {
     awb: {
       title: 'AWB Teachers - Website Building',
       description: 'Professional web development training',
-      modules: [
-        { id: 1, title: 'HTML Fundamentals', completed: true, duration: '2 hours' },
-        { id: 2, title: 'CSS Styling', completed: true, duration: '3 hours' },
-        { id: 3, title: 'JavaScript Basics', completed: false, duration: '4 hours' },
-        { id: 4, title: 'React Framework', completed: false, duration: '5 hours' },
-        { id: 5, title: 'Portfolio Project', completed: false, duration: '6 hours' }
-      ],
       progress: 40,
       nextClass: 'JavaScript Fundamentals - Tomorrow 2:00 PM',
-      instructor: 'Dr. Sarah Williams'
+      instructor: 'Dr. Sarah Williams',
+      totalModules: 12,
+      completedModules: 5
     },
     radio: {
       title: 'African JahVa Radio',
       description: 'Radio broadcasting and audio production',
-      modules: [
-        { id: 1, title: 'Radio Broadcasting Basics', completed: true, duration: '2 hours' },
-        { id: 2, title: 'Audio Equipment', completed: false, duration: '3 hours' },
-        { id: 3, title: 'Content Creation', completed: false, duration: '4 hours' },
-        { id: 4, title: 'Live Show Hosting', completed: false, duration: '5 hours' }
-      ],
       progress: 25,
       nextClass: 'Audio Equipment Setup - Friday 10:00 AM',
-      instructor: 'Marcus Johnson'
+      instructor: 'Marcus Johnson',
+      totalModules: 10,
+      completedModules: 3
     },
     finance: {
       title: 'Learn Finance',
       description: 'Personal and business financial management',
-      modules: [
-        { id: 1, title: 'Financial Fundamentals', completed: true, duration: '2 hours' },
-        { id: 2, title: 'Budgeting & Planning', completed: true, duration: '3 hours' },
-        { id: 3, title: 'Investment Strategies', completed: false, duration: '4 hours' },
-        { id: 4, title: 'Business Finance', completed: false, duration: '5 hours' }
-      ],
       progress: 50,
       nextClass: 'Investment Portfolio - Monday 9:00 AM',
-      instructor: 'Jennifer Davis'
+      instructor: 'Jennifer Davis',
+      totalModules: 8,
+      completedModules: 4
     },
     management: {
       title: 'Management Course',
       description: 'Leadership and business management skills',
-      modules: [
-        { id: 1, title: 'Leadership Principles', completed: true, duration: '3 hours' },
-        { id: 2, title: 'Team Management', completed: false, duration: '4 hours' },
-        { id: 3, title: 'Project Planning', completed: false, duration: '3 hours' },
-        { id: 4, title: 'Business Strategy', completed: false, duration: '5 hours' }
-      ],
       progress: 25,
       nextClass: 'Team Building Workshop - Wednesday 1:00 PM',
-      instructor: 'Robert Chen'
+      instructor: 'Robert Chen',
+      totalModules: 10,
+      completedModules: 3
     },
     fitness: {
       title: 'Fitness Instructor',
       description: 'Professional fitness training certification',
-      modules: [
-        { id: 1, title: 'Exercise Science', completed: true, duration: '4 hours' },
-        { id: 2, title: 'Nutrition Basics', completed: true, duration: '3 hours' },
-        { id: 3, title: 'Program Design', completed: true, duration: '5 hours' },
-        { id: 4, title: 'Client Assessment', completed: false, duration: '4 hours' }
-      ],
       progress: 75,
       nextClass: 'Practical Assessment - Thursday 8:00 AM',
-      instructor: 'Amanda Rodriguez'
+      instructor: 'Amanda Rodriguez',
+      totalModules: 8,
+      completedModules: 6
     },
     travel: {
       title: 'Angel Travel',
       description: 'Hospitality and travel management',
-      modules: [
-        { id: 1, title: 'Tourism Industry Overview', completed: true, duration: '2 hours' },
-        { id: 2, title: 'Hotel Management', completed: false, duration: '4 hours' },
-        { id: 3, title: 'Customer Service', completed: false, duration: '3 hours' },
-        { id: 4, title: 'Travel Planning', completed: false, duration: '5 hours' }
-      ],
       progress: 25,
       nextClass: 'Hotel Operations - Tuesday 11:00 AM',
-      instructor: 'Michael Thompson'
+      instructor: 'Michael Thompson',
+      totalModules: 9,
+      completedModules: 2
     }
   };
 
   const course = courseData[courseId || 'awb'] || courseData.awb;
-  const completedModules = course.modules.filter((m: any) => m.completed).length;
 
   if (!user) return <div>Loading...</div>;
 
@@ -155,12 +131,12 @@ const CourseDashboard = () => {
           <p className="text-gray-600 mb-4">{course.description}</p>
           <div className="flex items-center space-x-4">
             <Badge variant="secondary">Instructor: {course.instructor}</Badge>
-            <Badge variant="outline">{completedModules}/{course.modules.length} Modules Completed</Badge>
+            <Badge variant="outline">{course.completedModules}/{course.totalModules} Modules Completed</Badge>
           </div>
         </div>
 
         {/* Progress Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium text-gray-600">Overall Progress</CardTitle>
@@ -182,7 +158,7 @@ const CourseDashboard = () => {
             </CardHeader>
             <CardContent>
               <div className="flex items-start space-x-2">
-                <Clock className="h-4 w-4 text-blue-600 mt-1" />
+                <Calendar className="h-4 w-4 text-blue-600 mt-1" />
                 <div>
                   <p className="text-sm font-medium">{course.nextClass}</p>
                 </div>
@@ -205,46 +181,34 @@ const CourseDashboard = () => {
               </div>
             </CardContent>
           </Card>
+
+          <Card>
+            <CardHeader className="pb-2">
+              <CardTitle className="text-sm font-medium text-gray-600">Support</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center space-x-2">
+                <MessageCircle className="h-4 w-4 text-purple-600" />
+                <span className="text-sm font-medium">Ask Questions</span>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
-        {/* Course Modules */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div>
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Course Modules</h3>
-            <div className="space-y-4">
-              {course.modules.map((module: any) => (
-                <Card key={module.id} className={`transition-all duration-200 ${module.completed ? 'bg-green-50 border-green-200' : 'hover:shadow-md'}`}>
-                  <CardContent className="p-4">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        {module.completed ? (
-                          <CheckCircle className="h-5 w-5 text-green-600" />
-                        ) : (
-                          <Play className="h-5 w-5 text-gray-400" />
-                        )}
-                        <div>
-                          <h4 className="font-medium text-gray-900">{module.title}</h4>
-                          <p className="text-sm text-gray-600">{module.duration}</p>
-                        </div>
-                      </div>
-                      <Button 
-                        size="sm" 
-                        variant={module.completed ? "outline" : "default"}
-                        disabled={module.completed}
-                      >
-                        {module.completed ? 'Completed' : 'Start'}
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
+        {/* Main Content Tabs */}
+        <Tabs defaultValue="content" className="space-y-6">
+          <TabsList>
+            <TabsTrigger value="content">Course Content</TabsTrigger>
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="resources">Resources</TabsTrigger>
+          </TabsList>
 
-          {/* Additional Info */}
-          <div>
-            <h3 className="text-xl font-bold text-gray-900 mb-4">Course Information</h3>
-            <div className="space-y-4">
+          <TabsContent value="content">
+            <CourseContent courseId={courseId || 'awb'} />
+          </TabsContent>
+
+          <TabsContent value="overview">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <Card>
                 <CardHeader>
                   <CardTitle className="flex items-center space-x-2">
@@ -253,7 +217,14 @@ const CourseDashboard = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-gray-600">Complete all modules to earn your professional certification in {course.title}.</p>
+                  <p className="text-gray-600 mb-4">Complete all modules to earn your professional certification in {course.title}.</p>
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-sm">
+                      <span>Progress towards certification</span>
+                      <span>{course.progress}%</span>
+                    </div>
+                    <Progress value={course.progress} className="h-2" />
+                  </div>
                 </CardContent>
               </Card>
 
@@ -274,8 +245,32 @@ const CourseDashboard = () => {
                 </CardContent>
               </Card>
             </div>
-          </div>
-        </div>
+          </TabsContent>
+
+          <TabsContent value="resources">
+            <Card>
+              <CardHeader>
+                <CardTitle>Course Resources</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="border-l-4 border-indigo-500 pl-4">
+                    <h4 className="font-semibold">Course Materials</h4>
+                    <p className="text-gray-600">Download PDFs, worksheets, and additional reading materials.</p>
+                  </div>
+                  <div className="border-l-4 border-purple-500 pl-4">
+                    <h4 className="font-semibold">Community Forum</h4>
+                    <p className="text-gray-600">Connect with fellow students and ask questions.</p>
+                  </div>
+                  <div className="border-l-4 border-green-500 pl-4">
+                    <h4 className="font-semibold">Office Hours</h4>
+                    <p className="text-gray-600">Join weekly Q&A sessions with your instructor.</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

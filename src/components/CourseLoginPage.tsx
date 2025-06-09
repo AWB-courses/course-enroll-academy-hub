@@ -89,12 +89,12 @@ const CourseLoginPage = () => {
     fitness: {
       id: 'fitness',
       title: 'Fitness Instructor',
-      description: 'Become a certified fitness instructor. Learn exercise science, nutrition, and how to design effective workout programs.',
+      description: 'Become a certified fitness instructor. Learn exercise science, nutrition, and how to design effective workout programmes.',
       image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop',
       features: [
         'Exercise science fundamentals',
         'Nutrition guidance',
-        'Workout program design',
+        'Workout programme design',
         'Client assessment',
         'Professional certification'
       ]
@@ -138,7 +138,7 @@ const CourseLoginPage = () => {
             <Card className="bg-white/80 backdrop-blur-sm border-gray-200 shadow-xl">
               <CardContent className="p-6 sm:p-8">
                 <div className="text-center mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Enroll in {course.title}</h3>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">Enrol in {course.title}</h3>
                   <p className="text-gray-600">Sign in to start your learning journey</p>
                 </div>
                 <LoginForm courseId={courseId} />

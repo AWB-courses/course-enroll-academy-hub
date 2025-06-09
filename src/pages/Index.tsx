@@ -1,111 +1,99 @@
-import { useState, useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+
+import { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import TeamSection from '@/components/TeamSection';
 import TestimonialsSection from '@/components/TestimonialsSection';
 import Footer from '@/components/Footer';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
-import { BookOpen, Users, Award, TrendingUp, ExternalLink } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { 
+  BookOpen, 
+  Users, 
+  Award, 
+  Clock,
+  ArrowRight,
+  ExternalLink,
+  CheckCircle,
+  Star
+} from 'lucide-react';
 
 const Index = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    const currentUser = localStorage.getItem('currentUser');
-    if (currentUser) {
-      const user = JSON.parse(currentUser);
-      if (user.role === 'admin') {
-        navigate('/admin-dashboard');
-      } else {
-        navigate('/dashboard');
-      }
-    }
-  }, [navigate]);
-
-  useEffect(() => {
-    // Add scroll animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in');
-        }
-      });
-    }, observerOptions);
-
-    const animatedElements = document.querySelectorAll('.scroll-animate');
-    animatedElements.forEach(el => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, []);
-
   const courses = [
     {
       id: 'awb',
-      title: 'AWB Teachers - Website Building',
-      description: 'Learn to build professional websites and join our team of certified website builders.',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop',
-      students: '1,200/year',
-      level: 'Beginner to Advanced'
+      title: "AWB Teachers - Website Building",
+      description: "Learn to build professional websites and join our team of certified website builders.",
+      duration: "12 weeks",
+      students: "1,200/year",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&h=250&fit=crop",
+      features: ['HTML & CSS Mastery', 'JavaScript Fundamentals', 'React Development', 'Portfolio Creation']
     },
     {
       id: 'radio',
-      title: 'African JahVa Radio',
-      description: 'Radio broadcasting, audio production, and media management training.',
-      image: 'https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=250&fit=crop',
-      students: '500/year',
-      level: 'Intermediate'
+      title: "African JahVa Radio",
+      description: "Radio broadcasting, audio production, and media management training.",
+      duration: "8 weeks",
+      students: "500/year",
+      image: "https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=250&fit=crop",
+      features: ['Broadcasting Techniques', 'Audio Production', 'Live Presenting', 'Media Management']
     },
     {
       id: 'finance',
-      title: 'Learn Finance',
-      description: 'Master money management, accounting, and financial literacy skills.',
-      image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=250&fit=crop',
-      students: '1,000/month',
-      level: 'Beginner'
+      title: "Learn Finance",
+      description: "Master money management, accounting, and financial literacy skills.",
+      duration: "10 weeks",
+      students: "1,000/month",
+      image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=250&fit=crop",
+      features: ['Personal Budgeting', 'Investment Planning', 'Business Finance', 'Wealth Building']
     },
     {
       id: 'management',
-      title: 'Management Course',
-      description: 'Personal and business management, time management, and leadership skills.',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop',
-      students: '800/month',
-      level: 'Intermediate'
+      title: "Management Course",
+      description: "Personal and business management, time management, and leadership skills.",
+      duration: "6 weeks",
+      students: "800/month",
+      image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=250&fit=crop",
+      features: ['Leadership Skills', 'Team Coordination', 'Project Planning', 'Strategic Thinking']
     },
     {
       id: 'fitness',
-      title: 'Fitness Instructor',
-      description: 'Professional fitness training and wellness coaching certification.',
-      image: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop',
-      students: '400/month',
-      level: 'Beginner'
+      title: "Fitness Instructor",
+      description: "Become a certified fitness instructor with comprehensive training.",
+      duration: "8 weeks",
+      students: "400/month",
+      image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=250&fit=crop",
+      features: ['Exercise Science', 'Nutrition Planning', 'Client Training', 'Safety Protocols']
     },
     {
       id: 'travel',
-      title: 'Angel Travel',
-      description: 'Hotel management, travel planning, and hospitality services.',
-      image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=250&fit=crop',
-      students: '300/month',
-      level: 'Intermediate'
+      title: "Angel Travel",
+      description: "Hotel management, travel planning, and hospitality services.",
+      duration: "8 weeks",
+      students: "400/month",
+      image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=400&h=250&fit=crop",
+      features: ['Hotel Operations', 'Customer Service', 'Travel Planning', 'Tourism Management']
     }
   ];
 
-  const affiliateCourses = [
+  const affiliatePartners = [
     {
-      title: 'Cool Viral Moves',
-      description: 'Dance and social media content creation for viral marketing.',
-      image: 'https://images.unsplash.com/photo-1547036967-23d11aacaee0?w=400&h=250&fit=crop',
-      externalUrl: 'https://coolviralmoves.com'
+      name: "Global Tech Institute",
+      logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=100&fit=crop",
+      url: "https://globaltechinstitute.com",
+      description: "Advanced technology and AI courses"
     },
     {
-      title: 'GBE Partnerships',
-      description: 'Entrepreneur networking and business partnership opportunities.',
-      image: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=400&h=250&fit=crop',
-      externalUrl: 'https://gbepartnerships.com'
+      name: "Creative Arts Academy",
+      logo: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0?w=200&h=100&fit=crop",
+      url: "https://creativearts.academy",
+      description: "Digital art and design programmes"
+    },
+    {
+      name: "Business Excellence Hub",
+      logo: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=200&h=100&fit=crop",
+      url: "https://businessexcellence.hub",
+      description: "Executive and leadership training"
     }
   ];
 
@@ -114,65 +102,73 @@ const Index = () => {
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <BookOpen className="h-8 w-8 text-indigo-600" />
               <h1 className="text-2xl font-bold text-gray-900">Zylo Academy</h1>
             </div>
+            <nav className="hidden md:flex items-center space-x-6">
+              <Link to="/about" className="text-gray-600 hover:text-gray-900 transition-colors">About</Link>
+              <Link to="/courses" className="text-gray-600 hover:text-gray-900 transition-colors">Courses</Link>
+              <Link to="/contact" className="text-gray-600 hover:text-gray-900 transition-colors">Contact</Link>
+              <Link to="/careers" className="text-gray-600 hover:text-gray-900 transition-colors">Careers</Link>
+            </nav>
           </div>
         </div>
       </header>
 
-      <div className="container mx-auto px-4 py-8 sm:py-12">
-        {/* Hero Section */}
-        <div className="text-center mb-12 sm:mb-20 scroll-animate">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-6">
-            Master New Skills with
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600"> Zylo Academy</span>
-          </h2>
-          <p className="text-lg sm:text-xl text-gray-600 leading-relaxed max-w-4xl mx-auto mb-8">
-            Empowering motivated African and Caribbean students with modern skills needed to secure jobs and enhance their income through our comprehensive training programs.
+      {/* Hero Section */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto text-center">
+          <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+            Transform Your Future with
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">
+              Zylo Academy
+            </span>
+          </h1>
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+            Join our comprehensive training programmes designed to equip you with modern skills and direct pathways to employment in our network of 20+ companies.
           </p>
-
-          {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6 max-w-4xl mx-auto">
-            <Card className="bg-white/50 backdrop-blur-sm border-gray-200 hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-4 sm:p-6 text-center">
-                <Users className="h-6 w-6 sm:h-8 sm:w-8 text-indigo-600 mx-auto mb-2" />
-                <div className="text-xl sm:text-2xl font-bold text-gray-900">50K+</div>
-                <div className="text-xs sm:text-sm text-gray-600">Active Students</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/50 backdrop-blur-sm border-gray-200 hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-4 sm:p-6 text-center">
-                <Award className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600 mx-auto mb-2" />
-                <div className="text-xl sm:text-2xl font-bold text-gray-900">20+</div>
-                <div className="text-xs sm:text-sm text-gray-600">Business Divisions</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/50 backdrop-blur-sm border-gray-200 hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-4 sm:p-6 text-center">
-                <TrendingUp className="h-6 w-6 sm:h-8 sm:w-8 text-green-600 mx-auto mb-2" />
-                <div className="text-xl sm:text-2xl font-bold text-gray-900">95%</div>
-                <div className="text-xs sm:text-sm text-gray-600">Employment Rate</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-white/50 backdrop-blur-sm border-gray-200 hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-4 sm:p-6 text-center">
-                <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600 mx-auto mb-2" />
-                <div className="text-xl sm:text-2xl font-bold text-gray-900">15+</div>
-                <div className="text-xs sm:text-sm text-gray-600">Course Programs</div>
-              </CardContent>
-            </Card>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button size="lg" className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700">
+              <BookOpen className="mr-2 h-5 w-5" />
+              Browse Courses
+            </Button>
+            <Button size="lg" variant="outline">
+              <Users className="mr-2 h-5 w-5" />
+              Join Community
+            </Button>
           </div>
         </div>
+      </section>
 
-        {/* Available Courses Section */}
-        <div className="mb-16 scroll-animate">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Our Training Programs</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Choose from our comprehensive courses designed to equip you with industry-relevant skills and direct pathways to employment.
+      {/* Statistics */}
+      <section className="py-12 px-4 bg-white/50">
+        <div className="container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div>
+              <h3 className="text-3xl font-bold text-indigo-600 mb-2">5,000+</h3>
+              <p className="text-gray-600">Students Enrolled</p>
+            </div>
+            <div>
+              <h3 className="text-3xl font-bold text-purple-600 mb-2">20+</h3>
+              <p className="text-gray-600">Partner Companies</p>
+            </div>
+            <div>
+              <h3 className="text-3xl font-bold text-green-600 mb-2">95%</h3>
+              <p className="text-gray-600">Employment Rate</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Course Overview */}
+      <section className="py-20 px-4">
+        <div className="container mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Our Training Programmes</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Choose from our carefully crafted programmes designed to give you practical skills and guaranteed employment opportunities.
             </p>
           </div>
 
@@ -189,67 +185,97 @@ const Index = () => {
                 <CardContent className="p-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-3">{course.title}</h3>
                   <p className="text-gray-600 mb-4">{course.description}</p>
-                  <div className="space-y-2 text-sm text-gray-600 mb-6">
-                    <div className="flex items-center justify-between">
-                      <span>Students: {course.students}</span>
-                      <span className="bg-indigo-100 text-indigo-700 px-2 py-1 rounded text-xs">{course.level}</span>
+                  
+                  <div className="space-y-2 text-sm text-gray-600 mb-4">
+                    <div className="flex items-center">
+                      <Clock className="h-4 w-4 mr-2" />
+                      <span>{course.duration}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Users className="h-4 w-4 mr-2" />
+                      <span>{course.students}</span>
                     </div>
                   </div>
+
+                  <div className="mb-6">
+                    <h4 className="font-semibold text-gray-900 mb-2">What You'll Learn:</h4>
+                    <div className="space-y-1">
+                      {course.features.slice(0, 2).map((feature, index) => (
+                        <div key={index} className="flex items-center text-sm text-gray-600">
+                          <CheckCircle className="h-3 w-3 mr-2 text-green-600" />
+                          <span>{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                   <Link 
                     to={`/${course.id}`} 
                     className="w-full inline-block text-center bg-gradient-to-r from-indigo-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-indigo-700 hover:to-purple-700 transition-all duration-200"
                   >
-                    Enroll Now
+                    Enrol Now
                   </Link>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Affiliate Courses Section */}
-        <div className="mb-16 scroll-animate">
+      {/* Affiliate Partners */}
+      <section className="py-16 px-4 bg-white/50">
+        <div className="container mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">Partner Programs</h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Explore additional opportunities through our trusted affiliate partners.
-            </p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Partner Programmes</h2>
+            <p className="text-xl text-gray-600">Explore additional learning opportunities with our trusted partners</p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {affiliateCourses.map((course, index) => (
-              <Card key={index} className="bg-white/80 backdrop-blur-sm border-gray-200 hover:shadow-xl transition-all duration-300 group">
-                <div className="relative overflow-hidden">
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {affiliatePartners.map((partner, index) => (
+              <Card key={index} className="bg-white border-gray-200 hover:shadow-lg transition-all duration-300 group">
+                <CardContent className="p-6 text-center">
                   <img 
-                    src={course.image} 
-                    alt={course.title}
-                    className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                    src={partner.logo} 
+                    alt={partner.name}
+                    className="w-full h-24 object-cover rounded-lg mb-4"
                   />
-                </div>
-                <CardContent className="p-6">
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">{course.title}</h3>
-                  <p className="text-gray-600 mb-6">{course.description}</p>
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{partner.name}</h3>
+                  <p className="text-gray-600 mb-4">{partner.description}</p>
                   <a 
-                    href={course.externalUrl}
+                    href={partner.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-full inline-flex items-center justify-center bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-pink-700 transition-all duration-200"
+                    className="inline-flex items-center text-indigo-600 hover:text-indigo-800 font-medium"
                   >
-                    <span>Visit Partner Site</span>
-                    <ExternalLink className="ml-2 h-4 w-4" />
+                    Visit Programme
+                    <ExternalLink className="ml-1 h-4 w-4" />
                   </a>
                 </CardContent>
               </Card>
             ))}
           </div>
         </div>
+      </section>
 
-        {/* Team Section */}
-        <TeamSection />
+      {/* Team Section */}
+      <TeamSection />
 
-        {/* Testimonials Section */}
-        <TestimonialsSection />
-      </div>
+      {/* Testimonials */}
+      <TestimonialsSection />
+
+      {/* CTA Section */}
+      <section className="py-20 px-4 bg-gradient-to-r from-indigo-600 to-purple-600">
+        <div className="container mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Start Your Journey?</h2>
+          <p className="text-xl text-indigo-100 mb-8 max-w-2xl mx-auto">
+            Join thousands of students who have transformed their careers with Zylo Academy. Your future starts today.
+          </p>
+          <Button size="lg" className="bg-white text-indigo-600 hover:bg-gray-100">
+            <Award className="mr-2 h-5 w-5" />
+            Get Started Today
+          </Button>
+        </div>
+      </section>
 
       {/* Footer */}
       <Footer />
