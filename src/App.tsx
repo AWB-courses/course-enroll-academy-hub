@@ -19,6 +19,7 @@ import Privacy from "./pages/Privacy";
 import Disclaimer from "./pages/Disclaimer";
 import Legal from "./pages/Legal";
 import NotFound from "./pages/NotFound";
+import CourseLoginPage from "./components/CourseLoginPage";
 
 const queryClient = new QueryClient();
 
@@ -39,6 +40,15 @@ const AppContent = () => {
         <Route path="/privacy" element={<Privacy />} />
         <Route path="/disclaimer" element={<Disclaimer />} />
         <Route path="/legal" element={<Legal />} />
+        
+        {/* Course-specific login pages */}
+        <Route path="/awb" element={<CourseLoginPage />} />
+        <Route path="/radio" element={<CourseLoginPage />} />
+        <Route path="/finance" element={<CourseLoginPage />} />
+        <Route path="/management" element={<CourseLoginPage />} />
+        <Route path="/fitness" element={<CourseLoginPage />} />
+        <Route path="/travel" element={<CourseLoginPage />} />
+        
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
